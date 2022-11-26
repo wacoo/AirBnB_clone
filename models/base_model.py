@@ -38,6 +38,6 @@ class BaseModel:
         self.updated_at = datetime.now()
     def to_dict(self):
         self.__dict__["__class__"] = str(self.__class__.__name__)
-        self.__dict__['created_at'] = str(self.created_at)
-        self.__dict__['updated_at'] = str(self.updated_at)
+        #self.__dict__['created_at'] = str(self.created_at)
+        #self.__dict__['updated_at'] = str(self.updated_at)
         return self.__dict__
