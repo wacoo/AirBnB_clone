@@ -32,9 +32,6 @@ class HBNBCommand(cmd.Cmd):
     #Functional commands
     def default(self, line):
         cnt = 0
-        #l1 = line
-        #l2 = l1.strip('\"').strip("\'")
-        #print("ST1:" + l2)
         s = line.split('.')
         t = s[1].split()
         if s[1] == "count" or s[1] == "count()":
@@ -54,6 +51,7 @@ class HBNBCommand(cmd.Cmd):
                 pat_show = re.compile("show\(.+\)$")
                 #destroy()
                 pat_dest = re.compile("destroy\(.+\)$")
+                pat_update = re.compile("update\(.+\)$")
                 if s[0] == HBNBCommand.clses[i] and t[0] == "all()":
                     self.do_all(HBNBCommand.clses[i])
                     break
@@ -64,6 +62,11 @@ class HBNBCommand(cmd.Cmd):
                 elif s[0] == HBNBCommand.clses[i] and pat_dest.match(t[0]):
                     striped = t[0].strip('destroy(').strip(')')
                     self.do_destroy(s[0] + " " + striped.strip('\"').strip("\'"))
+                    break
+                elif s[0] == HBNBCommand.clses[i] and pat_update.match(s[1]):
+                    striped = s[1].strip('update(').strip(')')
+                    striped_comma = striped.replace(',', ' ')
+                    self.do_update(s[0] + " " + striped_comma.strip('\"').strip("\'"))
                     break
 
     def do_create(self, line):
