@@ -1,2 +1,1 @@
-{"id": "39864593-6d42-47b9-8a24-c512d07e58ac", "created_at": "2022-11-26 09:18:20.583414", "updated_at": "2022-11-26 09:18:20.583420", "wac": "FFFF", "__class__": "User"}
-{"id": "35a4c2cc-bf70-4f11-98fc-63ea5b8da200", "created_at": "2022-11-26 09:18:20.583463", "updated_at": "2022-11-26 09:18:20.583465", "__class__": "User"}
+{"BaseModel.9aae6c7d-f6a3-43d9-a1a0-a6485cdb2a46": {"id": "9aae6c7d-f6a3-43d9-a1a0-a6485cdb2a46", "created_at": "2022-11-27 18:30:35.398880", "updated_at": "2022-11-27 18:30:35.398900", "__class__": "BaseModel"}, "BaseModel.6e96372a-3324-4761-ad3c-2dcfab0bcf66": {"id": "6e96372a-3324-4761-ad3c-2dcfab0bcf66", "created_at": "2022-11-27 18:30:36.619489", "updated_at": "2022-11-27 18:30:36.619509", "__class__": "BaseModel"}}

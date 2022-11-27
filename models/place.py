@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-#TODO
+""" defines the Place class"""
 from models.base_model import BaseModel
 
 class Place(BaseModel):
+    """ This is a Place class defines different attributes of a place"""
     city_id = ""
     user_id = ""
     name = ""

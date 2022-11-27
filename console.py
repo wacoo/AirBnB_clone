@@ -51,7 +51,8 @@ class HBNBCommand(cmd.Cmd):
                 pat_show = re.compile("show\(.+\)$")
                 #destroy()
                 pat_dest = re.compile("destroy\(.+\)$")
-                pat_update = re.compile("update\(.+\)$")
+                pat_update = re.compile("update\(([a-z0-9A-Z])+\)$")
+                pat_upd_dict = re.compile("update\((.+)\,( )?\{([a-z0-9A-Z])+\:( )?.+\)$")
                 if s[0] == HBNBCommand.clses[i] and t[0] == "all()":
                     self.do_all(HBNBCommand.clses[i])
                     break
@@ -67,6 +68,18 @@ class HBNBCommand(cmd.Cmd):
                     striped = s[1].strip('update(').strip(')')
                     striped_comma = striped.replace(',', ' ')
                     self.do_update(s[0] + " " + striped_comma.strip('\"').strip("\'"))
+                    break
+                elif s[0] == HBNBCommand.clses[i] and pat_upd_dict.match(s[1]):
+                    striped = s[1].strip('update(').strip(')')
+                    striped_comma = striped.replace(',', ' ')
+                    col_rm = striped_comma.replace(':', ' ')
+                    st_par = col_rm.replace('\"', '').replace("\'", "")
+                    br_rem_par = st_par.replace('{', '').replace('}', '')
+                    param = br_rem_par.split()
+                    i = 0
+                    while i + 2 < len(param):
+                        self.do_update(s[0] + " " + param[0] + " "+ param[i + 1] + " " + param[i + 2])
+                        i += 2
                     break
 
     def do_create(self, line):

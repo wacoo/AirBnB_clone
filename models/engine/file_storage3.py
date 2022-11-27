@@ -21,25 +21,27 @@ class FileStorage:
     __filepath (str): path to a file to be saved
     __objects (dic): a dictionary of create objects
     """
-    __filepath = "file.json"
-    __objects = {}
-    """def __init__(self):
-        Initialises the class
+    def __init__(self):
+        """Initialises the class"""
         self.__filepath = "file.json"
-        self.__objects = {}"""
+        self.__objects = {}
     def all(self):
         """Returns all the objects created"""
         return self.__objects
     def new(self, obj):
         """Adds a new object"""
-        FileStorage.__objects[obj.__class__.__name__+"."+ obj.id] = obj
+        self.__objects[obj.__class__.__name__+"."+ obj.id] = obj
         
     def save(self):
         """Serialises __objects to JSON file located __filepath"""
-        dic = FileStorage.__objects
-        dic_obj = {obj: dic[obj].to_dict() for obj in dic.keys()}
+        list_of_dicts = []
         with open("file.json", 'w') as jfile:
-            json.dump(dic_obj, jfile, default=str)
+            if self.__objects is None:
+                jfile.write("[]")
+            else:
+                for k, v in self.__objects.items():
+                    jfile.write(json.dumps(v.to_dict(), default=str))
+                    jfile.write("\n")
 
     def reload(self):
         """Deserialises the JSON data located at __filepath to __objects"""
@@ -48,7 +50,7 @@ class FileStorage:
             obj_list = []
             with open("file.json", 'r') as jfile:
                 objc = None
-                obj_dict = json.load(jfile)
+                obj_dict = json.loads(obj)
                     #obj_list.append(obj_dict)
                 for v in obj_dict.values():
                     c_name = v["__class__"]
