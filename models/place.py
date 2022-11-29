@@ -2,6 +2,7 @@
 """ defines the Place class"""
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """ This is a Place class defines different attributes of a place"""
     city_id = ""
@@ -15,4 +16,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = ""
-

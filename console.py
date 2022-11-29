@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-#Todo
-import cmd, sys
+""" Defines the HBNBCommand class """
+import cmd
+import sys
 from models.base_model import BaseModel
 from models.user import User
-from models.state import State 
+from models.state import State
 from models.place import Place
 from models.city import City
 from models.amenity import Amenity
@@ -11,26 +12,51 @@ from models.review import Review
 from models import storage
 import re
 
+
 class HBNBCommand(cmd.Cmd):
+    """ This class is a child of the cmd class that
+    prvides customisable cmd interpreter. This class
+    is commnadline console to create show and update
+    our AirBnB application
+    Attributes:
+        clses (list): contains list of all classes created
+        prompt (str): provides the prompt text
+    """
+
     intro = ''
     prompt = '(hbnb)'
-    #names of classes
-    clses = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
-    #Support commands
+    # names of classes
+    clses = ["BaseModel", "User", "Place", "State",
+             "City", "Amenity", "Review"]
+    # Support commands
+
     def help_EOF(self):
+        """ provides help text to EOF command"""
         print("EOF command to exit the program")
+
     def help_quit(self):
+        """ provides help text to quit command"""
         print("Quit command to exit the program")
+
     def help_update(self):
+        """ provides help text to update command"""
         print('update <class name> <id> <attribute name> "<attribute value>"')
+
     def do_EOF(self, line):
+        """ this method quits the cmd """
         return True
+
     def do_quit(self, line):
+        """ this method quits the cmd """
         return True
+
     def emptyline(self):
+        """ prevents the repeatition of previous result when empty input"""
         pass
-    #Functional commands
+
+    # Functional commands
     def default(self, line):
+        """ Class.command type commands"""
         cnt = 0
         s = line.split('.')
         t = s[1].split()
@@ -47,12 +73,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             for i in range(len(HBNBCommand.clses)):
-                #show()
-                pat_show = re.compile("show\(.+\)$")
-                #destroy()
-                pat_dest = re.compile("destroy\(.+\)$")
-                pat_update = re.compile("update\(([a-z0-9A-Z])+\)$")
-                pat_upd_dict = re.compile("update\((.+)\,( )?\{([a-z0-9A-Z])+\:( )?.+\)$")
+                # show()
+                pat_show = re.compile(r"show\(.+\)$")
+                # destroy()
+                pat_dest = re.compile(r"destroy\(.+\)$")
+                pat_update = re.compile(r"update\(([a-z0-9A-Z])+\)$")
+                pat_upd_dict = re.compile(\
+                        r"update\((.+)\,( )?\{([a-z0-9A-Z])+\:( )?.+\)$")
                 if s[0] == HBNBCommand.clses[i] and t[0] == "all()":
                     self.do_all(HBNBCommand.clses[i])
                     break
@@ -83,6 +110,7 @@ class HBNBCommand(cmd.Cmd):
                     break
 
     def do_create(self, line):
+        """ Creates a object from a class """
         if line == None or line == "":
             print("** class name missing **")
         else:
@@ -108,6 +136,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_show(self, line):
+        """ shows the instance with id given"""
         args = line.split()
         if len(args) == 0 or args == None:
             print("** class name missing **")
@@ -123,7 +152,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 print("** class doesn't exist **")
+
     def do_destroy(self, line):
+        """ removes the instance with the id given"""
         args = line.split()
         if len(args) == 0 or args == None:
             print("** class name missing **")
@@ -140,6 +171,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, line):
+        """ displays all the instances of a class given"""
         objs = storage.all()
         lst = []
         for i in range(len(HBNBCommand.clses)):
@@ -153,6 +185,7 @@ class HBNBCommand(cmd.Cmd):
         print("** class doesn't exist **")
 
     def do_update(self, line):
+        """ add new or changes exsiting attributes of an instace give by id"""
         args = line.split()
         objs = storage.all()
         if len(args) == 0 or args == None:
@@ -181,10 +214,6 @@ class HBNBCommand(cmd.Cmd):
                 #print("** no instance found **")
             else:
                 print("** class doesn't exist **")
-    
-    def dd(self):
-        pass
-
 
 
 

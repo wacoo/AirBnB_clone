@@ -4,10 +4,12 @@
 from models.base_model import BaseModel
 from models.state import State
 import models
+
+
 class City(BaseModel):
-    """ This is the city class that defines 
+    """ This is the city class that defines
     different attributes of the class """
-    state_id = "" # State.id
+    state_id = ""  # State.id
     name = ""
 
     def __init__(self, *arg, **kwarg):
